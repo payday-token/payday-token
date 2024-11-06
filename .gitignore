@@ -1,0 +1,6 @@
+.venv/
+.env
+.htaccess
+.info
+config.php
+secret.js

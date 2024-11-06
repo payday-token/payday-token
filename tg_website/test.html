@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayDay Token</title>
+    <link rel="icon" href="https://tg.pday.online/imgs/paydayicon.png" type="image/png">
+    <style>
+         /* Style for the DIV with background and new spinner */
+         #loadingDiv {
+            position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    min-width: 439px; /* Minimum width */
+    width: auto; /* Auto width */
+    height: calc(100vh - 20px); /* Full height minus top and bottom margins */
+    background-image: url('imgs/payday_poster.png'); /* Replace with the correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px; /* Optional: padding around the content */
+}
+
+        /* Style for the new red spinner */
+        .loading-spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid red;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        /* Keyframes for the spinner animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide the loading div after content loads */
+        .loaded #loadingDiv {
+            display: none;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            #loadingDiv {
+                background-size: contain;
+                align-items: center; /* Center the spinner vertically for smaller screens */
+            }
+            .loading-spinner {
+                width: 30px;
+                height: 30px;
+                border-width: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="loadingDiv">
+    <div class="loading-spinner"></div>
+</div>
+    <script>
+       // Delay execution by 10 seconds
+       setTimeout(function () {
+            // Get the full URL including the fragment (hash)
+            var fullUrl = window.location.href;
+
+            // Replace 'index.php' with 'webapp.php' in the full URL
+            fullUrl = fullUrl.replace('index.php', 'webapp.php');
+
+            // Send the updated full URL to the server using an AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "webapp.php", true);  // PHP script path
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Define what happens when the server responds
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Insert the content into the body
+                    document.body.innerHTML = xhr.responseText;
+
+                    // Load external script files
+                    loadExternalScripts();
+
+                    // Find and execute any <script> tags
+                    var scripts = document.body.getElementsByTagName("script");
+                    for (var i = 0; i < scripts.length; i++) {
+                        eval(scripts[i].innerText);  // Execute the script content
+                    }
+
+                    document.body.classList.add('loaded');
+                }
+            };
+
+            // Send the request with the decode fullUrl
+            xhr.send("full_url=" + fullUrl);
+
+            // Optionally, log the updated full URL to the console for debugging
+            console.log("Updated Full URL: " + fullUrl);
+
+            // Function to load external scripts
+            function loadExternalScripts() {
+                var scriptUrls = [
+                    'https://telegram.org/js/telegram-web-app.js',  // Add your script URLs here
+                    'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+                    'https://tg.pday.online/includes/webappscripts_5.js'
+                ];
+
+                // Dynamically load each script
+                scriptUrls.forEach(function (url) {
+                    var script = document.createElement('script');
+                    script.src = url;
+                    script.type = 'text/javascript';
+                    document.body.appendChild(script);
+                });
+            }
+        }, 10000); // 10000 milliseconds = 10 seconds
+    </script>
+</body>
+
+</html>

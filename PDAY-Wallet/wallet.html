@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://wallet.pday.online/imgs/paydayicon.png" type="image/png">
+    <title>PayDay Payment System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: gold;
+            background-color: #1a1a1a;
+            display: flex; /* Use flexbox to center the content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+        }
+    
+        .container {
+            max-width: 760px; /* Set maximum width */
+            width: 100%; /* Allow it to take full width up to max-width */
+            padding: 10px; /* Add some padding */
+        }
+    
+        .header {
+            /* background-image: url('imgs/wallet_banner.png');
+            background-size: cover; */
+            padding: 30px;
+            text-align: center;
+        }
+    
+        .header-logo {
+            font-size: 1.5rem;
+            color: gold;
+            margin-top: 10px;
+        }
+    
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        .content {
+            padding: 10px;
+        }
+    
+        .authentication-overlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+        }
+    
+        .auth-box {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+    
+        .auth-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid gold;
+            background-color: #1a1a1a;
+            color: gold;
+        }
+    
+        .transaction {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+    
+        .transaction input {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid gold;
+            background-color: #1a1a1a;
+            color: gold;
+        }
+    
+        .send-button {
+            width: 100%;
+            padding: 15px;
+            background-color: gold;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+    
+        .send-button.loading {
+            background-color: #ccc;
+            color: #1a1a1a;
+            cursor: not-allowed;
+            position: relative;
+        }
+    
+        .send-button.loading:after {
+            content: "";
+            position: absolute;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1a1a1a;
+            border-top: 2px solid gold;
+            border-radius: 50%;
+            animation: spin 0.5s linear infinite;
+        }
+
+         /* New styles for buttons in auth-box */
+    .auth-box button {
+        width: 100%;
+        padding: 15px; /* Increased padding for larger buttons */
+        background-color: gold;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2rem; /* Increased font size */
+        margin-top: 10px; /* Space between buttons */
+    }
+
+    .auth-box button.loading {
+        background-color: #ccc;
+        color: #1a1a1a;
+        cursor: not-allowed;
+        position: relative;
+    }
+
+    .auth-box button.loading:after {
+        content: "";
+        position: absolute;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #1a1a1a;
+        border-top: 2px solid gold;
+        border-radius: 50%;
+        animation: spin 0.5s linear infinite;
+    }
+    
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+    
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    
+        .footer {
+            padding: 15px;
+            text-align: center;
+            background-color: #333;
+        }
+    
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .header {
+                padding: 20px;
+            }
+    
+            .auth-box {
+                padding: 10px;
+                width: 90%;
+            }
+    
+            .send-button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+    
+            .footer {
+                padding: 10px;
+            }
+        }
+    </style>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bip39/3.0.5/bip39.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    <div class="header">
+        <div class="logo">
+            <img src="imgs/wallet_banner.png" alt="PayDay Token Logo" width="100%">
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="authenticationOverlay" class="authentication-overlay">
+            <div class="auth-box">
+                <h2>Enter Password</h2>
+                <input type="password" id="passWordInput" placeholder="Enter your password"/>
+                <button onclick="authenticateUser()">Login</button>
+                <button onclick="showCreateOrImportKeyOverlay()">Import / Create Wallet</button>
+            </div>
+        </div>
+        <div id="createOrImportKeyOverlay" class="authentication-overlay">
+            <div class="auth-box">
+                <h2>Enter Passphrase</h2>
+                <input type="password" id="passphraseInput" placeholder="Enter your passphrase">
+                <button onclick="importKey()">Import Wallet</button>
+                <h2>or</h2>
+                <button onclick="CreateKey()">Create New Wallet</button>
+            </div>
+        </div>
+
+        <div class="transaction-form">
+            <div id="balanceDisplay" class="balance-display">
+                Loading balances...
+            </div>
+            <h3>Distribute PDAY Tokens</h3>
+            <div id="transactionInputs">
+                <div class="transaction">
+                    <input type="text" placeholder="Employee Address" class="address-input">
+                    <input type="number" placeholder="Amount in PDAY" class="amount-input">
+                </div>
+            </div>
+            <button class="add-line-button" onclick="addTransactionLine()">Add More</button>
+            <button class="send-button" onclick="sendPDAYPayment()">Send Payment</button>
+        </div>
+
+        <div class="history-tab">
+            <h3>Transaction History</h3>
+            <ul id="transactionHistory"></ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 PayDay Token. All rights reserved.
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tonconnect/sdk@latest/dist/tonweb.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/elliptic@latest/dist/elliptic.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bip39@3.0.5/bip39.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bip39@3.0.4"></script>
+<script src="includes/secret.js"></script>
+<script src="includes/wallet_6.js"></script>
+</body>
+
+</html>

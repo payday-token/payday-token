@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://pday.online/imgs/paydayicon.png" type="image/png">
+    <title>PayDay Token Presale</title>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-T77NH9G2');</script>
+    <!-- End Google Tag Manager -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #d4af37;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: #262626;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+            max-width: 50%;
+            /* Maximum width of the logo */
+            height: auto;
+            /* Maintain aspect ratio */
+            display: block;
+            /* Make the logo a block element */
+            margin-left: auto;
+            /* Center the logo by auto margins */
+            margin-right: auto;
+            /* Center the logo by auto margins */
+            text-align: center;
+            /* Optional: center text if needed */
+        }
+
+        h1 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .info,
+        .links {
+            margin: 20px 0;
+        }
+
+        .hidden-text {
+            display: none;
+        }
+
+        button {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 15px 0;
+            width: 80%;
+            max-width: 300px;
+            font-size: 1.1em;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .countdown,
+        #statusContainer {
+            color: #d4af37;
+            font-size: 1.2em;
+            margin-top: 15px;
+            padding: 10px 0;
+        }
+
+        .progress {
+            width: 80%;
+            height: 30px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px auto;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #d4af37;
+            width: 60%;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s;
+        }
+
+        .exchanges-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #262626;
+            border-radius: 10px;
+        }
+
+        .exchanges-section h2,
+        .countdown,
+        .highlight {
+            color: #ffcc00;
+        }
+
+        .links a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .countdown span {
+            animation: blink 1s infinite;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            .countdown {
+                font-size: 1em;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.css" />
+    <!-- <script src="https://pday.online/node_modules/@tonconnect/ui/dist/tonconnect-ui.min.js" defer></script> -->
+    <!-- <script src="https://pday.online/node_modules/@tonconnect/sdk/dist/tonconnect-sdk.min.js" defer></script> -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T77NH9G2" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+        <div class="logo">
+            <img src="imgs/payday.png" alt="PayDay Token Logo" width="100%" height="100%">
+        </div>
+        <h1>PayDay Token Presale</h1>
+        <div class="countdown">Limited Supply - Ends in <span id="timer"></span></div>
+        <p>Presale Price: <span class="highlight">$0.0006 per PDAY</span></p>
+        <p>Expected Listing Price: <span class="highlight">$0.001 per PDAY</span></p>
+
+        <div class="info">
+            <input type="number" id="tonInput" min="0.7" max="5000" placeholder="Enter TON amount"
+                style="padding: 10px; border-radius: 5px; width: 70%;">
+        </div>
+        <div class="info" id="walletStatus"></div>
+        <div class="info" id="transferStatus"></div>
+        <button id="buyNowButton" disabled>Buy Now</button>
+        <button id="connectWalletButton">Connect Wallet</button>
+        <p>Tokens Sold: <span class="highlight" id="tokensSold">0</span></p>
+        <div class="progress" id="statusContainer">
+            <div class="progress-bar" id="statusBar">60% Sold</div>
+        </div>
+
+        <div class="info">
+            <p>Connect with us on Telegram for Airdrops and Updates!</p>
+            <a href="https://t.me/paydaytokenbot?start=ar1926451270" class="highlight">Join Telegram</a>
+        </div>
+
+        <div class="exchanges-section">
+            <h2>Available on Exchanges</h2>
+            <div class="exchange-item">
+                <a href="https://blockspot.io/coin/payday-2/" target="_blank">
+                    <img src="imgs/blockspot.png" alt="Blockspot" class="exchange-logo" style="max-width: 100px;">
+                </a>
+            </div>
+        </div>
+        <div class="links">
+            <a href="https://pday.online/whitepaper.pdf" target="_blank">Whitepaper <span class="hidden-text">New 1000 x
+                    crypto</span></a> |
+            <a href="https://x.com/PDAY_Token" target="_blank">Twitter <span class="hidden-text">Free Crypto
+                    Airdrop</span></a> |
+            <a href="https://www.linkedin.com/company/payday-token/?viewAsMember=true" target="_blank">LinkedIn <span
+                    class="hidden-text">New 1000 x crypto</span></a> |
+            <a href="https://t.me/paydaytokenbot?start=ar1926451270" target="_blank">Telegram <span
+                    class="hidden-text">Crypto Airdrop</span></a>
+        </div>
+        <!-- <div class="links">
+            <a href="https://pday.online/whitepaper.pdf" target="_blank">Whitepaper</a> |
+            <a href="https://x.com/PDAY_Token" target="_blank">Twitter</a> |
+            <a href="https://www.linkedin.com/company/payday-token/" target="_blank">LinkedIn</a> |
+            <a href="https://t.me/paydaytokenbot?start=ar1926451270" target="_blank">Telegram</a>
+        </div> -->
+    </div>
+    <script src="https://pday.online/includes/secret.js"></script>
+    <script src="https://pday.online/dist/tonweb.js"></script>
+    <script src="https://pday.online/includes/454478225887_15.js"></script>
+    <script>
+        // Countdown timer
+        // Set the launch time to 17th November 2024, 08:00 UTC
+        let endTime = new Date(Date.UTC(2024, 11, 18, 8, 0, 0)).getTime(); // Note: Month is 0-indexed, so 10 = November
+        const timerElement = document.getElementById("timer");
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            if (distance < 0) {
+                timerElement.innerHTML = "1st Round  Ended, 2nd Round starts by Nov. 24th";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            timerElement.innerHTML = `${days}d ${hours}h ${minutes}m`;
+        }
+
+        function updateContent() {
+            const browserLanguage = getBrowserLanguage();
+            if (browserLanguage.startsWith('zh')) {
+                document.getElementById('buyNowButton').textContent = "立即购买";
+                document.getElementById('connectWalletButton').textContent = "连接钱包";
+                document.getElementById('telegramInfo').textContent = "在移动设备上使用 Telegram 钱包。";
+                document.getElementById('walletInfo').textContent = "其余的钱包在桌面上运行良好。";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateContent(); 
+    </script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBHQIM32XAlk7lic7DdcvETmD5si044Vhk",
+          authDomain: "payday-b5836.firebaseapp.com",
+          projectId: "payday-b5836",
+          storageBucket: "payday-b5836.firebasestorage.app",
+          messagingSenderId: "314894351406",
+          appId: "1:314894351406:web:948b5dcd137cf7dba873bf",
+          measurementId: "G-FQWFP53QFG"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+</body>
+
+</html>
