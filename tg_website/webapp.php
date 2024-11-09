@@ -684,12 +684,12 @@ function createUsersTable(PDO $db)
         document.getElementById('twitterFoollowBtn').disabled = !enableTwitterFollow;
         document.getElementById('twitterRetweetBtn').disabled = !enableTwitterRepost;
         document.getElementById('connectWalletBtn').disabled = !walletConnected;
-        var inviteLink = 'https://t.me/paydaytokenbot';
-        var inviteText = '🌟 Join the PayDay Token Revolution! 🌟\n\n';
-        inviteText += 'Get in on the ground floor of PayDay Token and secure your path to financial success. Participate in\n';
-        inviteText += 'our presale or distribution and you could soon be counting millions while others watch in awe!\n';
-        inviteText += "Don't miss out on this chance to be part of something BIG!\n\n";
-        inviteText += '💸 Click here to join now!n\n';
+        var inviteLink = 'https://t.me/paydaytokenbot?start=ar1926451270';
+        var inviteText = '🚀 Join the PayDay Token Revolution! 🚀\n\n';
+        inviteText += 'Be part of the future with PayDay Token and set yourself up\n';
+        inviteText += 'for financial success! 🌐 Claim your share in our limited \n';
+        inviteText += "token distribution before it’s gone! 🔥\n\n";
+        inviteText += '👉 Join now!\n\n';
         //html encode inviteText and inviteLink
         inviteText = encodeURIComponent(inviteText);
         inviteLink = encodeURIComponent(inviteLink);
