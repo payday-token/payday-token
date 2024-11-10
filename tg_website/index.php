@@ -276,7 +276,7 @@ function servePresalePage()
                 var scriptUrls = [
                     'https://telegram.org/js/telegram-web-app.js',  // Add your script URLs here
                     'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-                    'https://tg.pday.online/includes/webappscripts_6.js'
+                    'https://tg.pday.online/includes/webappscripts_7.js'
                 ];
 
                 // Dynamically load each script
