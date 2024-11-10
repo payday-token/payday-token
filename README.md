@@ -11,9 +11,9 @@ PayDay Token is dedicated to revolutionizing payroll payments by creating a dece
 - **Cost-Effective Transactions:** PayDay significantly reduces transaction fees and delays, ensuring timely payments with minimal costs.
 
 ### 🚀 Get Involved
-1. **Airdrop:** Join our community airdrop and earn $PDAY by completing simple tasks.
-2. **Token Purchase:** Explore our token bundles available on Whop.com for exclusive early-access investment options.
-3. **Community:** Stay updated by following us on [Twitter](https://twitter.com/PDAY_Token) and joining our [Telegram](https://t.me/paydaytoken) for announcements, airdrops, and development updates.
+1. **Airdrop:** [Join our community](https://t.me/paydaytokenbot?start=ar1926451270) airdrop and earn $PDAY by completing simple tasks.
+2. **Token Purchase:** Explore our token bundles available on [Whop.com](https://whop.com/marketplace/pday6355-s-whop/?pass=prod_vkgtaWTyIkw7h) for exclusive early-access investment options.
+3. **Community:** Stay updated by following us on [Twitter](https://twitter.com/PDAY_Token) and joining our [Telegram](https://t.me/paydaytokenchan) for announcements, airdrops, and development updates.
 
 ### 💻 Repositories
 Check out our codebase for integrations, payroll smart contracts, and developer tools to help streamline blockchain payroll.
