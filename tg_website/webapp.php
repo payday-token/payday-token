@@ -661,7 +661,7 @@ function createUsersTable(PDO $db)
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://tg.pday.online/includes/webappscripts_6.js"></script>
+    <script src="https://tg.pday.online/includes/webappscripts_7.js"></script>
     <script>
         // Convert session values into actual booleans
         const telegramId = "<?php echo $_SESSION['telegram_id']; ?>";

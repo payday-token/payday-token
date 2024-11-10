@@ -7,7 +7,7 @@ const connectWalletButton = document.getElementById("connectWalletBtn");
 const linkedInFollowBtntatus = document.getElementById("linkedInFollowBtnStatus");
 const taskStatus = document.getElementById("taskStatus");
 const linkedInPageUrl = "https://www.linkedin.com/company/payday-token/about/?viewAsMember=true";
-const linkedInPostUrl = "https://t.me/tokenpayday";
+const linkedInPostUrl = "https://t.me/tokenpaydaychan";
 const tqitterProfileUrl = "https://x.com/PDAY_Token";
 const twitterPostUrl = "https://x.com/PDAY_Token/status/1851276856391000459";
 
