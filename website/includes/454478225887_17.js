@@ -261,14 +261,16 @@ function fetchTotalPayDayBought(siteKey) {
                 console.error("Error:", data.error);
                 alert(data.error); // Alert the error
             } else {
+                let limitPaging = 100_000_000;
+                let cappedLimit = 10047592;
                 let totalPayDayBought = parseFloat(data.totalPayDayBought) || 0;
                 if(totalPayDayBought < 10047592){
-                    totalPayDayBought += 10047592;
+                    totalPayDayBought += cappedLimit;
                 }
-                let cappedLimit = 10047592;
+
                 const maxX = 10_000_000_000; // 10 billion per round
                 if (totalPayDayBought >= cappedLimit) {
-                    cappedLimit = Math.min(totalPayDayBought + 10_000_000, maxX);
+                    cappedLimit = Math.min(totalPayDayBought + limitPaging, maxX);
                 }
                 const tokensSold = document.getElementById("tokensSold");
                 const statusBar = document.getElementById("statusBar");
