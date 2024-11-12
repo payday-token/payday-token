@@ -16,7 +16,7 @@ $dbPassword = $config['db_password'];
 $dbName = $config['db_name'];
 
 // Usage
-$botToken = $config['bot_token'];
+$botToken = $config['channel_manager_bot'];
 $chatId = $config['group_name'];  // You can use the group ID or group username
 
 $conn = new mysqli($dbServer, $$dbServer, $dbPassword, $dbName);
