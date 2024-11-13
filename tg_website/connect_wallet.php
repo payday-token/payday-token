@@ -355,7 +355,7 @@ if (isset($_SESSION['telegram_id'])) {
             </div>
         <?php } else { ?>
             <button id="connectWalletButton">Connect Wallet</button>
-            <button id="payNowButton" disabled>Validate with 0.2 TON</button>
+            <button id="payNowButton" disabled>Promote TON with 0.2 TON</button>
             <div id="message" class="message"></div>
         <?php } ?>
     </div>
